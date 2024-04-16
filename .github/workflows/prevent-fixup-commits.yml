@@ -1,0 +1,15 @@
+name: Release
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  prevent-fixup-commits:
+    name: Prevent Fixup Commits
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prevent fixup commits
+        uses: ./
