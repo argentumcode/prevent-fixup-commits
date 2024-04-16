@@ -1,0 +1,29 @@
+name: Test
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3.0.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Check format
+        run: pnpm run format:check
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Check build result is updated
+        run: git diff --stat --exit-code
