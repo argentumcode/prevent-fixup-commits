@@ -1,4 +1,4 @@
-name: Release
+name: Prevent fixup commits
 
 on:
   pull_request:
