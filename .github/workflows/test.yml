@@ -1,0 +1,43 @@
+name: Check prevent fixup commit
+
+on:
+  push:
+
+jobs:
+  check-prevent-fixup-commits:
+    name: Check Prevent Fixup Commits
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3.0.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Check Success
+        run: |
+          echo '{"number":1}' >> /tmp/events.json
+          export GITHUB_EVENT_PATH=/tmp/events.json
+          pnpm run run
+        env:
+          INPUT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check failure
+        run: |
+          echo '{"number":7}' >> /tmp/events.json
+          export GITHUB_EVENT_PATH=/tmp/events.json
+          if pnpm run run; then
+            echo 'Unexpceted success'
+            exit 1
+          else
+            echo 'Expected failure'
+          fi
+        env:
+          INPUT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
