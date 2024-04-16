@@ -4,7 +4,7 @@ inputs:
   token:
     description: "github repo token"
     required: true
-    default: ${{ secrets.GITHUB_TOKEN }}
+    default: ${{ github.token }}
 runs:
   using: "node20"
   main: "dist/index.js"
