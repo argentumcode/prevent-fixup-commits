@@ -1,0 +1,10 @@
+name: "prevent-fixup-commits"
+description: "Prevent merge commits with the word 'fixup!' in the message"
+inputs:
+  token:
+    description: "github repo token"
+    required: true
+    default: ${{ github.token }}
+runs:
+  using: "node20"
+  main: "dist/index.js"
