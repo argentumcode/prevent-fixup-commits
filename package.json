@@ -1,6 +1,6 @@
 {
   "name": "prevent-fixup-commits",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "GitHub Action to prevent merging pull requests containing \"fixup!\" commits:",
   "main": "dist/index.js",
   "scripts": {
