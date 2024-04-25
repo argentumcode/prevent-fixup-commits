@@ -16,8 +16,6 @@ jobs:
     name: Prevent Fixup Commits
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
-
       - name: Prevent fixup commits
         uses: argentumcode/prevent-fixup-commits@v1.0.0
 ```
